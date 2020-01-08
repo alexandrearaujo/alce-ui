@@ -194,8 +194,6 @@ EnhancedTableHead.propTypes = {
   
       this.setState({ order, orderBy });
     };
-
- 
   
     handleChangePage = (event, page) => {
       const {fetchPaginacao} = this.props;
@@ -205,7 +203,7 @@ EnhancedTableHead.propTypes = {
         if(!paginacaoNumeroElementos){
           paginacaoNumeroElementos=0;
         }
-        fetchPaginacao(page * rowsPerPage, rowsPerPage)
+        fetchPaginacao(page, rowsPerPage)
       } 
       this.setState({ page });
       
@@ -224,8 +222,6 @@ EnhancedTableHead.propTypes = {
       } 
       this.setState({ rowsPerPage: rowsPerPage });
     };
-   
-   
 
     criarColunas = () =>{
         const {  colunas, opcoesColuna } = this.props; 
@@ -256,12 +252,6 @@ EnhancedTableHead.propTypes = {
       }
 
       let rowsPerPageOptions = [5, 10, 25, 50, 100];
-
-      if(data.length<5) {
-        rowsPerPageOptions = [data.length];
-        rowsPerPage = data.length;
-      }
-
        
       const emptyRows = 0;//rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage); 
   
