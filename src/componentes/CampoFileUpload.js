@@ -87,7 +87,7 @@ export default class CampoFileUpload extends Component {
                     ref={fileInput => this.fileInput = fileInput}
              />             
              <CampoInformacaoAlerta mensagens={this.state.mostrarMsgInvalido ? ['Extensão do arquivo não permitido.'] : []} tipo={TIPO_MENSAGEM.ERRO} />    
-             <CampoInformacaoAlerta mensagens={this.state.mostrarMsgSucesso ? ['Arquivo anexado com sucesso.'] : []} tipo={TIPO_MENSAGEM.SUCCESSO} />           
+             <CampoInformacaoAlerta mensagens={this.state.mostrarMsgSucesso && this.props.opcoesUpload.salvaAnexo != null && !this.props.opcoesUpload.salvaAnexo ? ['Arquivo anexado. É necessário Salvar para efetivar a alteração..'] : []} tipo={TIPO_MENSAGEM.INFO} />           
              <GridContainer>
                 <GridItem xs={12} sm={12} md={5}>
                   <CampoTexto label="Arquivo Selecionado:" id="arqSelcionado" value={this.state.nomeArquivoSelecionado}  maxlength={100} enabled={false} size={3} obrigatorio={false} />
@@ -109,14 +109,16 @@ export default class CampoFileUpload extends Component {
 }
 
 
-export function OpcoesUploadGenerico(acao, disabled, extensoesValidas) {
+export function OpcoesUploadGenerico(acao, disabled, extensoesValidas, salvaAnexo) {
   this.acao = acao;  
   this.disabled = disabled;  
   this.extensoesValidas = extensoesValidas;
+  this.salvaAnexo = salvaAnexo;
 }
 
 OpcoesUploadGenerico.propTypes = {
   acao: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
-  extensoesValidas: PropTypes.array.isRequired
+  extensoesValidas: PropTypes.array.isRequired, 
+  salvaAnexo: PropTypes.bool.isRequired,
 };

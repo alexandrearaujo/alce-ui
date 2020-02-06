@@ -31,7 +31,7 @@ import Select, {ChoiceRenderer} from './componentes/Select';
 import CampoComboBox from './componentes/template/CustomInput/CustomSelect.jsx';
 import CustomTabs from './componentes/template/CustomTabs/CustomTabs.jsx';
 import CampoFileUpload, { OpcoesUploadGenerico } from "./componentes/CampoFileUpload";
-import GridGenericaSimples,{GridGenericaSimplesColuna, OpcaoColunaGrid,GridGenericaSimplesColunaMonetario, GridGenericaSimplesColunaPercentual} from './componentes/GridGenericaSimples';
+import GridGenericaSimples,{GridGenericaSimplesColuna, OpcaoColunaGrid,GridGenericaSimplesColunaMonetario, GridGenericaSimplesColunaCPF, GridGenericaSimplesColunaPercentual} from './componentes/GridGenericaSimples';
 import {MASCARA_ENUM,capturarConteudoCompleto,contemItemArray,removerItemArray, REGRAS_VALIDACOES} from './componentes/FormularioUtil';
 
 
@@ -88,6 +88,7 @@ export {
     GridGenericaSimples,
     GridGenericaSimplesColuna,
     GridGenericaSimplesColunaMonetario,
+    GridGenericaSimplesColunaCPF,
     GridGenericaSimplesColunaPercentual,
     OpcaoColunaGrid,
     ImagemLink,

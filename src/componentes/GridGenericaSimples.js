@@ -18,14 +18,20 @@ import {capturarConteudoCompleto} from './FormularioUtil';
 import Card from '../componentes/template/Card/Card.jsx';
 import CardBody from '../componentes/template/Card/CardBody.jsx';
 
-
- 
-
 function desc(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
+  var orderByList = orderBy.split(".");
+  
+  if (orderByList.length > 1) {
+    var atributo = orderByList[1];
+  }
+
+  var campoB = atributo !== undefined && atributo !== null && b[orderByList[0]] !== undefined ? b[orderByList[0]][atributo] : b[orderByList[0]];
+  var campoA = atributo !== undefined && atributo !== null && a[orderByList[0]] !== undefined ? a[orderByList[0]][atributo] : a[orderByList[0]];
+
+  if (campoB < campoA) {
     return -1;
   }
-  if (b[orderBy] > a[orderBy]) {
+  if (campoB > campoA) {
     return 1;
   }
   return 0;
@@ -44,8 +50,6 @@ function stableSort(array, cmp) {
 function getSorting(order, orderBy) {
   return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
 }
-
-
 
 class EnhancedTableHead extends React.Component {
     createSortHandler = property => event => {
@@ -255,8 +259,8 @@ EnhancedTableHead.propTypes = {
        
       const emptyRows = 0;//rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage); 
   
-      const listaTratada = fetchPaginacao ? data : stableSort(data, getSorting(order, orderBy))
-      .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage); 
+      const listaTratada = fetchPaginacao ? stableSort(data, getSorting(order, orderBy)).slice(0,rowsPerPage) : 
+      stableSort(data, getSorting(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage); 
 
       return (
         <Card><CardBody>
@@ -345,6 +349,14 @@ export function OpcaoColunaGrid(acao, icone, title, onConfigure) {
         this.onConfigure = onConfigure; 
 }
 
+export function GridGenericaSimplesColunaCPF(atributo, titulo, largura) {
+  this.atributo = atributo;
+  this.titulo = titulo;
+  this.largura = largura;
+  this.mascara = (valor) => {  
+    return formatarCPF(valor);
+  }
+}
 
 export function GridGenericaSimplesColunaMonetario(atributo, titulo, largura) {
     this.atributo = atributo;
@@ -377,6 +389,20 @@ const formatarNumerico = (valor) => {
     retorno =   "" + valor;
   }
   return retorno; 
+}
+
+function formatarCPF(cpf){
+  if(cpf){
+    cpf = cpf + "";
+    cpf = pad_with_zeroes(cpf + '',11); 
+    cpf=cpf.replace(/\D/g,"");
+    cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2");
+    cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2");
+    cpf=cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2");
+    return cpf;
+  }else{
+    return "";
+  }
 }
 
 const pad_with_zeroes = (number, length) => {
