@@ -1,6 +1,6 @@
 {
   "name": "alce-ui",
-  "version": "2.0.28",
+  "version": "2.0.29",
   "description": "ALCE UI é conjunto de componentes necessário para você criar sites e apps com HTML5 & JavaScript. Baseados em componentes REACT, contém um conjunto de ótimos widgets de UI, essencial para desenvolvimento de grandes e inovadores experiêcias com aplicações WEB.",
   "main": "build/index.js",
   "peerDependencies": {
