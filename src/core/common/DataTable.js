@@ -42,7 +42,7 @@ class DataTable extends React.Component {
                                             <IconButton className={classes.button} aria-label="Desabiltar"
                                                         color="primary"
                                                         onClick={event => actions.disable(event,row.id)}>
-                                                <Icon>edit_icon</Icon>
+                                                <Icon>info_icon</Icon>
                                             </IconButton>) : null}
 
                                     {(actions.remove) ? (
